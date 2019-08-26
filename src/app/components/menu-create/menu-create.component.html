@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <h3 class="number">1</h3>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut laudantium ex quos</p>
+      <form [formGroup]='form' class="form-group" novalidate autocomplete="off">
+        <div class="form-group">
+          <input type="text" class="form-control" formControlName='dish'>
+        </div>
+
+        <div class="form-group text-right">
+          <button class="btn btn-primary" [disabled]="form.invalid?true:null" (click)="addDish()">Thêm món ăn</button>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-4">
+      <h3 class="number">2</h3>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut laudantium ex quos</p>
+      <div class="card">
+        <div class="card-body">
+          <div *ngFor="let dish of menu.dishes">
+            {{dish}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <h3 class="number">3</h3>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut laudantium ex quos </p>
+      <loading-button>
+        <button class="btn btn-primary loading" (click)="createMenu()">
+          create menu
+        </button>
+      </loading-button>
+      <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert" *ngIf="error">
+        {{error.message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+        <strong>Tuyệt vời!!! </strong>Bữa ngon của bạn đã được chia sẻ tới mọi người. Tiếp tục chia sẻ hoặc <a
+          href="">Xem thêm
+          bữa ngon</a>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
