@@ -1,19 +1,30 @@
-import { Component, OnInit, ContentChild, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  AfterViewInit,
+  OnDestroy
+} from '@angular/core';
 import { Menu } from 'src/app/core/model/menu.model';
 import { MenuService } from 'src/app/service/menu.service';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { LoadingButtonComponent } from 'src/app/shared/components/loading-button/loading-button.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AlertMessageComponent } from 'src/app/shared/components/alert-message/alert-message.component';
 @Component({
   selector: 'menu-create',
   templateUrl: './menu-create.component.html',
   styleUrls: ['./menu-create.component.scss']
 })
-export class MenuCreateComponent implements OnInit {
+export class MenuCreateComponent implements OnInit, AfterViewInit, OnDestroy {
   menu: Menu;
-  error;
+  errorMessage: string;
   form: FormGroup;
+  isShowAlert;
+  _onCloseObs;
+  @ViewChild(AlertMessageComponent, { static: false })
+  alertMessage: AlertMessageComponent;
   @ViewChild(LoadingButtonComponent, { static: false })
   loadingButton: LoadingButtonComponent;
   constructor(
@@ -27,6 +38,14 @@ export class MenuCreateComponent implements OnInit {
       dish: ['', Validators.required]
     });
   }
+  ngAfterViewInit() {
+    this._onCloseObs = this.alertMessage.onClose.subscribe(() => {
+      this.errorMessage = null;
+    });
+  }
+  ngOnDestroy() {
+    this._onCloseObs.unsubscribe();
+  }
   addDish() {
     if (this.form.invalid) {
       return;
@@ -36,22 +55,24 @@ export class MenuCreateComponent implements OnInit {
   }
   createMenu() {
     this.loadingButton.loading(true);
+    this.form.disable();
     this.menuService
-      .createMenu(this.menu)
+      .create(this.menu)
       .pipe(
         catchError(err => {
-          this.showError(err.error);
           this.loadingButton.loading(false);
-          return throwError(err.error.message);
+          this.form.enable();
+          this.alertMessage.showFailAlert();
+          this.errorMessage = err.error.message;
+          return throwError(this.errorMessage);
         })
       )
-      .subscribe(val => {
+      .subscribe(() => {
         this.loadingButton.loading(false);
+        this.form.enable();
+        this.alertMessage.showSuccessAlert();
         this.menu.dishes = [];
         this.form.reset();
       });
-  }
-  showError(error) {
-    this.error = error;
   }
 }

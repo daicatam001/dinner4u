@@ -1,15 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { ApiService } from './api.service';
 import { Menu } from '../core/model/menu.model';
+import { PaginationParams } from '../core/model/pagination-params.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MenuService {
-  constructor(private apiService: ApiService) {
-    this.apiService.setBaseUrl('menu');
-  }
-  createMenu(menu: Menu) {
-    return this.apiService.create(menu);
+export class MenuService extends ApiService {
+  constructor(injector: Injector) {
+    super(injector);
+    this.setBaseUrl('menu');
   }
 }
