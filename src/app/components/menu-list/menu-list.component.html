@@ -1,17 +1,14 @@
-<div class="container">
-  <div class="row row-eq-height">
-    <div class="col-sm-3" *ngFor="let menu of menuList">
-      <div class="card h-100 mb-3">
-        <div class="card-body">
-          <div class="menu-item" *ngFor="let dish of menu.dishes">
-            {{dish}}
-          </div>
+<div class="row row-eq-height">
+  <div class="col-sm-3" *ngFor="let menu of menuList">
+    <div class="card h-100 mb-3">
+      <div class="card-body">
+        <div class="menu-item" *ngFor="let dish of menu.dishes">
+          {{dish}}
         </div>
       </div>
     </div>
   </div>
-  <loading-button>
-    <button class="btn btn-primary loading" (click)="showMore()" *ngIf="menuList.length>0">Xem thêm</button>
-  </loading-button>
-
 </div>
+<loading-button>
+  <button class="btn btn-primary loading" (click)="showMore()" *ngIf="menuList.length>0">Xem thêm</button>
+</loading-button>

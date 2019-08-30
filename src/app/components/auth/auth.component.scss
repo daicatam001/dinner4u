@@ -1,0 +1,23 @@
+.modal {
+  background-color: rgba(8, 25, 43, 0.85);
+}
+.modal-content {
+  max-width: 460px;
+}
+.modal-header {
+  position: relative;
+}
+.modal-body {
+  padding: 40px;
+}
+.close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: black;
+  opacity: 1;
+  padding: 10px;
+  background-color: white;
+  border-radius: 50%;
+  font-size: 0.8rem;
+}

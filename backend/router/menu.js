@@ -17,20 +17,20 @@ router.post('', validator.createMenu, (req, res) => {
   }
   const dishes = req.body.dishes;
   const menu = new Menu({ dishes });
-  menu.save().then(menuObj => {
-    return res
-      .status(201)
-      .json({
+  menu
+    .save()
+    .then(menuObj => {
+      return res.status(201).json({
         status: 'ok'
-      })
-      .catch(error => {
-        console.log('TCL: error', error);
-        res.status(500).json({
-          status: 'error',
-          message: error.message
-        });
       });
-  });
+    })
+    .catch(error => {
+      console.log('TCL: error', error);
+      res.status(500).json({
+        status: 'error',
+        message: error.message
+      });
+    });
 });
 router.post('/find', validator.findMenu, (req, res) => {
   const result = validationResult(req);

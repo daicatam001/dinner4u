@@ -40,7 +40,10 @@ export class MenuCreateComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   ngAfterViewInit() {
     this._onCloseObs = this.alertMessage.onClose.subscribe(() => {
-      this.errorMessage = null;
+      // For fade effect
+      setTimeout(() => {
+        this.errorMessage = null;
+      }, 500);
     });
   }
   ngOnDestroy() {
@@ -54,25 +57,29 @@ export class MenuCreateComponent implements OnInit, AfterViewInit, OnDestroy {
     this.form.reset();
   }
   createMenu() {
-    this.loadingButton.loading(true);
-    this.form.disable();
-    this.menuService
-      .create(this.menu)
-      .pipe(
-        catchError(err => {
-          this.loadingButton.loading(false);
-          this.form.enable();
-          this.alertMessage.showFailAlert();
-          this.errorMessage = err.error.message;
-          return throwError(this.errorMessage);
-        })
-      )
-      .subscribe(() => {
-        this.loadingButton.loading(false);
-        this.form.enable();
+    this.loadingState(true);
+    this.menuService.create(this.menu).subscribe(
+      () => {
+        this.loadingState(false);
         this.alertMessage.showSuccessAlert();
         this.menu.dishes = [];
+        // For fade effect
+        setTimeout(() => {
+          this.errorMessage = null;
+        }, 500);
         this.form.reset();
-      });
+      },
+      err => {
+        this.loadingState(false);
+        this.alertMessage.showFailAlert();
+        this.errorMessage = err.error.message;
+        return throwError(this.errorMessage);
+      }
+    );
+  }
+  loadingState(state) {
+    // Disable form when loading
+    state ? this.form.disable() : this.form.enable();
+    this.loadingButton.loading(state);
   }
 }
