@@ -15,6 +15,7 @@ export class BsIconInputComponent implements OnInit {
     const iconClasses = {};
     if (this.icon) {
       iconClasses['fa'] = true;
+      iconClasses['fa-fw'] = true;
       iconClasses['fa-' + this.icon] = true;
     }
     return iconClasses;

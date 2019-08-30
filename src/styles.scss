@@ -6,7 +6,7 @@ body {
 }
 body {
   margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 //Boostrap valiable
 $border-color: #ced4da;
@@ -17,7 +17,13 @@ $border-color: #ced4da;
 .input-group-text {
   background-color: transparent;
 }
-.form-control:focus {
-  border-color: $border-color;
-  box-shadow: unset;
+.form-control {
+  &:focus {
+    border-color: $border-color;
+    box-shadow: unset;
+  }
+  &::placeholder {
+    /* Firefox, Chrome, Opera */
+    color: #d1d1d1;
+  }
 }
