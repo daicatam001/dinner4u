@@ -1,11 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'bs-icon-input',
-  templateUrl: './bs-icon-input.component.html',
-  styleUrls: ['./bs-icon-input.component.scss']
+  selector: 'icon-input',
+  templateUrl: './icon-input.component.html',
+  styleUrls: ['./icon-input.component.scss']
 })
-export class BsIconInputComponent implements OnInit {
+export class IconInputComponent implements OnInit {
   @Input() icon;
   constructor() {}
 

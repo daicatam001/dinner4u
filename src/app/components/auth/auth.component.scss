@@ -4,7 +4,7 @@
 .modal-content {
   max-width: 460px;
 }
-.modal-header {
+.nav {
   position: relative;
 }
 .modal-body {
@@ -12,6 +12,7 @@
 }
 .close {
   position: absolute;
+  transform: translate(50%, -50%);
   top: 0;
   right: 0;
   color: black;

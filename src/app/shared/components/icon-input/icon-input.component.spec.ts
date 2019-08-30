@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BsIconInputComponent } from './bs-icon-input.component';
+import { BsIconInputComponent } from './icon-input.component';
 
 describe('BsIconInputComponent', () => {
   let component: BsIconInputComponent;
@@ -8,9 +8,8 @@ describe('BsIconInputComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BsIconInputComponent ]
-    })
-    .compileComponents();
+      declarations: [BsIconInputComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
