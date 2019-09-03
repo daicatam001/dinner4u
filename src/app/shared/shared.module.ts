@@ -5,6 +5,8 @@ import { LoadingButtonDirective } from './components/loading-button/loading-butt
 import { AlertMessageComponent } from './components/alert-message/alert-message.component';
 import { TabComponent } from './components/tab/tab.component';
 import { IconInputComponent } from './components/icon-input/icon-input.component';
+import { ModalComponent } from './components/modal/modal.component';
+import { ModalModule } from './components/modal/modal.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { IconInputComponent } from './components/icon-input/icon-input.component
     AlertMessageComponent,
     TabComponent,
     IconInputComponent,
-    LibsModule
+    LibsModule,
+    ModalModule
   ]
 })
 export class SharedModule {}

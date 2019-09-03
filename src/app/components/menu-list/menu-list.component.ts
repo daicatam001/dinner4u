@@ -23,9 +23,14 @@ export class MenuListComponent implements OnInit {
 
   ngOnInit() {
     this.paginationParams = this.paginationService.reset();
-    this.menuService.find(this.paginationParams).subscribe((res: ResEntity) => {
-      this.menuList = res.data;
-    });
+    this.menuService.find(this.paginationParams).subscribe(
+      (res: ResEntity) => {
+        this.menuList = res.data || [];
+      },
+      () => {
+        this.menuList = [];
+      }
+    );
   }
   showMore() {
     this.paginationParams.page++;
