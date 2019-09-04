@@ -8,9 +8,13 @@ import {
   ComponentFactoryResolver,
   ChangeDetectorRef,
   OnDestroy,
-  ComponentRef
+  ComponentRef,
+  Input
 } from '@angular/core';
 import { ModalContentDirective } from './modal-content.directive';
+import { ModalService } from './modal.service';
+import { Subject } from 'rxjs';
+import { ModalConfig } from './modal.config';
 
 @Component({
   selector: 'modal',
@@ -22,9 +26,13 @@ export class ModalComponent implements OnInit, AfterViewInit, OnDestroy {
   contentChild: Type<any> | TemplateRef<any>;
   @ViewChild(ModalContentDirective, { static: false })
   modalContent: ModalContentDirective;
+
+  afterClosedSubject = new Subject();
+  public afterClosed$ = this.afterClosedSubject.asObservable();
   constructor(
     private resolver: ComponentFactoryResolver,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    public modalConfig: ModalConfig
   ) {}
 
   ngOnInit() {}
@@ -44,9 +52,25 @@ export class ModalComponent implements OnInit, AfterViewInit, OnDestroy {
       this.componentRef = viewContainerRef.createComponent(factory);
     }
   }
+  onOverlayClicked(event: MouseEvent) {
+    if (!this.modalConfig.disabledCloseOnClickOverlay) {
+      this.close();
+    }
+  }
+  get size() {
+    if (this.modalConfig.size) {
+      return 'modal-' + this.modalConfig.size;
+    }
+  }
+  onModalClicked(event: MouseEvent) {
+    event.stopPropagation();
+  }
   ngOnDestroy() {
     if (this.componentRef) {
       this.componentRef.destroy();
     }
+  }
+  close() {
+    this.afterClosedSubject.next();
   }
 }

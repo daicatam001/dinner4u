@@ -1,3 +1,9 @@
 export class ModalConfig {
-  data: any;
+  disabledCloseOnClickOverlay?: boolean = false;
+  disabledCloseButton?: boolean = false;
+  size?: string;
+  minWidth?: string;
+}
+export class ModalData {
+  data?: any;
 }

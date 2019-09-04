@@ -10,7 +10,10 @@ import {
   ChangeDetectorRef
 } from '@angular/core';
 import { TabComponent } from 'src/app/shared/components/tab/tab.component';
-import { ModalConfig } from 'src/app/shared/components/modal/modal.config';
+import {
+  ModalConfig,
+  ModalData
+} from 'src/app/shared/components/modal/modal.config';
 import { ModalService } from 'src/app/shared/components/modal/modal.service';
 
 @Component({
@@ -23,7 +26,7 @@ export class AuthComponent implements OnInit, AfterViewInit {
   selectedTab;
   constructor(
     private changeDetectorDef: ChangeDetectorRef,
-    private config: ModalConfig,
+    private modalData: ModalData,
     private modalService: ModalService
   ) {}
 
@@ -32,7 +35,7 @@ export class AuthComponent implements OnInit, AfterViewInit {
   }
   ngAfterViewInit() {
     if (!this.selectedTab && this.tabs.length) {
-      this.selectedTab = this.config.data.isLogin
+      this.selectedTab = this.modalData.data.isLogin
         ? this.tabs.first
         : this.tabs.last;
       this.selectedTab.selected = true;

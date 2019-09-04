@@ -20,7 +20,7 @@ export class HomeHeroComponent implements OnInit {
 
   ngOnInit() {}
   openAuth(event: Event, isLogin: boolean = false) {
-    this.modalService.open(AuthComponent, { data: { isLogin } });
+    this.modalService.open(AuthComponent, null, { data: { isLogin } });
     event.preventDefault();
   }
 }
