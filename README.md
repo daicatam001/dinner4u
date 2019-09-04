@@ -17,8 +17,13 @@ This is project about search menu for dinner using MEAN STACK
 - [x] add bootstrap css, font-awesome
 - [x] create menu-create component
 - [x] create menu-service
-- [x] add angular material
 - [x] create loading-button
+- [x] create Home Module
+  - [x] create HomeHero component
+    - [x] create AuthModule
+    - [x] create LoginComponent
+    - [x] create RegsiterComponent
+- [x] create ModalModule
 
 ## Back-end
 
@@ -27,3 +32,7 @@ This is project about search menu for dinner using MEAN STACK
 - [x] create Menu model
 - [x] create menu route
 - [x] create validator middleware
+- [x] create User Model
+- [x] create auth route
+  - [x] create register api
+  - [x] install bcryptjs

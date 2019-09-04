@@ -7,6 +7,7 @@ import { TabComponent } from './components/tab/tab.component';
 import { IconInputComponent } from './components/icon-input/icon-input.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { ModalModule } from './components/modal/modal.module';
+import { ShowPasswordDirective } from './directives/show-password.directive';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { ModalModule } from './components/modal/modal.module';
     LoadingButtonDirective,
     AlertMessageComponent,
     IconInputComponent,
-    TabComponent
+    TabComponent,
+    ShowPasswordDirective
   ],
   imports: [LibsModule],
   exports: [
@@ -24,7 +26,8 @@ import { ModalModule } from './components/modal/modal.module';
     TabComponent,
     IconInputComponent,
     LibsModule,
-    ModalModule
+    ModalModule,
+    ShowPasswordDirective
   ]
 })
 export class SharedModule {}

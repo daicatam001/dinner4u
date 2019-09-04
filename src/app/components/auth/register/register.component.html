@@ -1,0 +1,38 @@
+<form class="form-group" [formGroup]="form" novalidate autocomplete="off" (ngSubmit)="register()"
+  #registerForm="ngForm">
+  <div class="form-group">
+    <icon-input icon="user-o">
+      <input type="text" class="form-control" placeholder="Username" formControlName="username">
+    </icon-input>
+    <small class="form-text text-danger" *ngIf="registerForm.submitted && username.hasError('required')">Trường
+      bắt buộc</small>
+    <small class="form-text text-danger" *ngIf="registerForm.submitted && username.hasError('validUnique')">Username
+      không
+      hợp
+      lệ hoặc đã tồn tạo</small>
+  </div>
+  <div class="form-group">
+    <icon-input icon="envelope-o">
+      <input type="text" class="form-control" placeholder="Email" formControlName="email">
+    </icon-input>
+    <small class="form-text text-danger" *ngIf="registerForm.submitted && email.hasError('required')">Trường
+      bắt buộc</small>
+    <small class="form-text text-danger" *ngIf="registerForm.submitted && email.hasError('validUnique')">Email
+      không
+      hợp
+      lệ hoặc đã tồn tạo</small>
+  </div>
+  <div class="form-group">
+    <icon-input icon="lock">
+      <input [type]="type" class="form-control" placeholder="Password" formControlName="password">
+      <i class="show-password" [ngClass]="showPasswordIcon" (click)="toggleShowPassword()"></i>
+    </icon-input>
+    <small class="form-text text-danger" *ngIf="registerForm.submitted && password.hasError('required')">Trường
+      bắt buộc</small>
+    <small class="form-text text-danger" *ngIf="registerForm.submitted && password.hasError('minlength')">Password must
+      have at least 8 characters</small>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-primary btn-block">Đăng ký</button>
+  </div>
+</form>

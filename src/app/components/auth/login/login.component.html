@@ -1,0 +1,22 @@
+<form class="form-group" [formGroup]="form" novalidate autocomplete="off" (ngSubmit)="login()" #loginForm="ngForm">
+  <div class="form-group">
+    <icon-input icon="user">
+      <input type="text" class="form-control" placeholder="Email" formControlName="username">
+    </icon-input>
+  </div>
+  <div class="form-group">
+    <icon-input icon="lock">
+      <input type="password" class="form-control" placeholder="Password" formControlName="password">
+    </icon-input>
+  </div>
+  <div class="form-group">
+    <div class="form-check">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1" formControlName="rememberMe">
+      <label class="form-check-label" for="exampleCheck1"><small>Tự động đăng nhập</small></label>
+    </div>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-primary btn-block">Đăng nhập</button>
+  </div>
+  <small class="form-text text-muted"><strong>Quên mật khẩu?</strong></small>
+</form>

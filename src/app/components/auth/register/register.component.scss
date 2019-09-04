@@ -1,0 +1,15 @@
+input {
+  padding-right: 30px;
+}
+small {
+  font-weight: bold;
+  margin-left: 50px;
+  margin-top: 10px;
+}
+.show-password {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 99;
+}

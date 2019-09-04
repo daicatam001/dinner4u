@@ -1,10 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
-require('dotenv').config({ path: './backend/.env' });
 const bodyParser = require('body-parser');
-const menuRouter = require('./router/menu');
 const cors = require('cors');
 
+require('dotenv').config({ path: './backend/.env' });
+const menuRouter = require('./router/menu');
+const authRouter = require('./router/auth');
+const validateRouter = require('./router/validate');
 const app = express();
 // DB connection
 mongoose
@@ -18,6 +20,8 @@ app.use(cors());
 
 // Router
 app.use('/api/menu', menuRouter);
+app.use('/api/user/auth', authRouter);
+app.use('/api/validate', validateRouter);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {

@@ -9,7 +9,7 @@ const router = express.Router();
 // Create new menu
 router.post('', validator.createMenu, (req, res) => {
   const result = validationResult(req);
-  if (result.errors.length > 0) {
+  if (!result.isEmpty()) {
     return res.status(422).json({
       status: 'error',
       message: result.errors[0].msg
@@ -34,7 +34,7 @@ router.post('', validator.createMenu, (req, res) => {
 });
 router.post('/find', validator.findMenu, (req, res) => {
   const result = validationResult(req);
-  if (result.errors.length > 0) {
+  if (!result.isEmpty()) {
     console.log('TCL: result.errors', result.errors);
     return res.status(422).json({
       status: 'error',
