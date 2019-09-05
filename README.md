@@ -22,8 +22,13 @@ This is project about search menu for dinner using MEAN STACK
   - [x] create HomeHero component
     - [x] create AuthModule
     - [x] create LoginComponent
-    - [x] create RegsiterComponent
+    - [x] create RegisterComponent
 - [x] create ModalModule
+- [x] create register form
+  - [x] validate form field
+- [x] create register api
+- [x] create login form
+- [x] create login api
 
 ## Back-end
 
@@ -34,5 +39,6 @@ This is project about search menu for dinner using MEAN STACK
 - [x] create validator middleware
 - [x] create User Model
 - [x] create auth route
-  - [x] create register api
+  - [x] create register api validate
   - [x] install bcryptjs
+  - [x] create login api validate

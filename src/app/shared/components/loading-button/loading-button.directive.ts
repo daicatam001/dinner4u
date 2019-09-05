@@ -8,12 +8,15 @@ export class LoadingButtonDirective {
 
   loading(isLoading: boolean) {
     if (isLoading) {
+      const spanEl = document.createElement('span');
+      spanEl.className = 'icon';
       const spinnerEl = document.createElement('i');
       spinnerEl.className = 'fa fa-spinner fa-spin';
-      this.elementRef.nativeElement.append(spinnerEl);
+      spanEl.append(spinnerEl);
+      this.elementRef.nativeElement.append(spanEl);
       this.elementRef.nativeElement.disabled = true;
     } else {
-      this.elementRef.nativeElement.querySelector('i').remove();
+      this.elementRef.nativeElement.querySelector('span.icon').remove();
       this.elementRef.nativeElement.disabled = null;
     }
   }

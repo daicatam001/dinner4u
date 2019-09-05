@@ -10,7 +10,10 @@ const validateRouter = require('./router/validate');
 const app = express();
 // DB connection
 mongoose
-  .connect(process.env.DB_CONNECT, { useNewUrlParser: true })
+  .connect(process.env.DB_CONNECT, {
+    useCreateIndex: true,
+    useNewUrlParser: true
+  })
   .then(() => console.log('DB Connected'))
   .catch(() => console.log('DB Connection fail'));
 

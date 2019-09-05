@@ -1,0 +1,9 @@
+:host::ng-deep button {
+  position: relative;
+}
+:host::ng-deep .icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 15px;
+}

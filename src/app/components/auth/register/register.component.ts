@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -8,6 +8,7 @@ import {
 import { AuthService } from 'src/app/service/auth.service';
 import { ValidateService } from 'src/app/service/validate.service';
 import { CustomValidator } from 'src/app/shared/services/validator';
+import { LoadingButtonComponent } from 'src/app/shared/components/loading-button/loading-button.component';
 
 @Component({
   selector: 'register',
@@ -16,7 +17,11 @@ import { CustomValidator } from 'src/app/shared/services/validator';
 })
 export class RegisterComponent implements OnInit {
   form: FormGroup;
-  showPassword: boolean = true;
+  showPassword: boolean = false;
+  // @ViewChild(AlertMessageComponent, { static: false })
+  // alertMessage: AlertMessageComponent;
+  @ViewChild(LoadingButtonComponent, { static: false })
+  loadingButton: LoadingButtonComponent;
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -43,28 +48,18 @@ export class RegisterComponent implements OnInit {
       }
     );
   }
-  validateMatchingPassword(passwordControl: string) {
-    return (control: FormControl) => {
-      const group = control.parent;
-      if (!group) {
-        return null;
-      }
-      if (
-        group.get(passwordControl) &&
-        control &&
-        group.get(passwordControl).value !== control.value
-      ) {
-        return { matchingPassword: true };
-      }
-      return null;
-    };
-  }
+
   register() {
     if (this.form.invalid) {
       return;
     }
     const { username, email, password } = this.form.value;
+    this.loadingButton.loading(true);
+    this.form.disable();
     this.authService.register(username, email, password).subscribe(res => {
+      this.loadingButton.loading(false);
+      this.form.reset();
+      this.form.enable();
       console.log(res);
     });
   }

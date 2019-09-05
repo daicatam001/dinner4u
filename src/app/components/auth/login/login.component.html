@@ -1,4 +1,9 @@
 <form class="form-group" [formGroup]="form" novalidate autocomplete="off" (ngSubmit)="login()" #loginForm="ngForm">
+  <div class="form-group text-center">
+    <small class="font-weight-bold text-danger" *ngIf="loginForm.submitted && errorMessage ">
+      {{errorMessage}}
+    </small>
+  </div>
   <div class="form-group">
     <icon-input icon="user">
       <input type="text" class="form-control" placeholder="Email" formControlName="username">
@@ -16,7 +21,9 @@
     </div>
   </div>
   <div class="form-group">
-    <button class="btn btn-primary btn-block">Đăng nhập</button>
+    <loading-button>
+      <button class="btn btn-primary btn-block loading">Đăng nhập</button>
+    </loading-button>
   </div>
   <small class="form-text text-muted"><strong>Quên mật khẩu?</strong></small>
 </form>

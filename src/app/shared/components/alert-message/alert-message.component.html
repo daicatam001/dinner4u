@@ -1,5 +1,12 @@
 <div class="alert alert-dismissible fade mt-3" [ngClass]="classes">
-  <ng-content></ng-content>
+  <ng-container *ngIf="message;else template ">
+    {{message}}
+  </ng-container>
+  <ng-template #template>
+    <ng-content></ng-content>
+  </ng-template>
+
+
   <button type="button" class="close">
     <span (click)="close()">&times;</span>
   </button>

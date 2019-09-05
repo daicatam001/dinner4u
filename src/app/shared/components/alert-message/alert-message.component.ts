@@ -12,6 +12,7 @@ export class AlertMessageComponent implements OnInit {
   isShow: boolean;
   onClose: Observable<any>;
   observable;
+  message: string;
   constructor() {}
 
   ngOnInit() {
@@ -20,15 +21,26 @@ export class AlertMessageComponent implements OnInit {
     });
   }
 
-  showFailAlert() {
+  showFailAlert(message?: string) {
+    console.log(
+      'TCL: AlertMessageComponent -> showFailAlert -> message',
+      message
+    );
+    if (message) {
+      this.message = message;
+    }
     this.type = 'fail';
     this.isShow = true;
   }
-  showSuccessAlert() {
+  showSuccessAlert(message?: string) {
+    if (message) {
+      this.message = message;
+    }
     this.type = 'success';
     this.isShow = true;
   }
   close() {
+    this.message = null;
     this.type = null;
     this.isShow = false;
     this.observable.next();
