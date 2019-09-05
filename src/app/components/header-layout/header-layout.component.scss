@@ -1,0 +1,39 @@
+:host {
+  font-size: 0.8rem;
+}
+#navigation {
+  background-color: #13191d;
+}
+.menu {
+  color: #dedfdf;
+
+  font-weight: bold;
+}
+.auth {
+  color: white;
+  position: relative;
+  .user {
+    color: white;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  .tool-tip {
+    text-align: center;
+    padding: 20px;
+    position: absolute;
+    top: 100%;
+    display: none;
+    right: 0;
+    z-index: 1;
+    background-color: white;
+    color: black;
+    padding: 15px 25px;
+    border-radius: 5px;
+    min-width: 250px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  }
+  &:hover .tool-tip {
+    display: block;
+  }
+}

@@ -15,19 +15,6 @@ import { AuthComponent } from './components/auth/auth.component';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  constructor(
-    private modalService: ModalService,
-    private resolver: ComponentFactoryResolver,
-    private injector: Injector
-  ) {}
-  ngOnInit() {
-    // const factory = this.resolver.resolveComponentFactory(AuthComponent);
-    // const componentRef = factory.create(this.injector);
-    // componentRef.instance.dataTest = 'xsxs';
-    // componentRef.changeDetectorRef.detectChanges();
-    // this.modalService.open(componentRef);
-    // setTimeout(() => {
-    //   this.modalService.close();
-    // }, 200000);
-  }
+  constructor() {}
+  ngOnInit() {}
 }

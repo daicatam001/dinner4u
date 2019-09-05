@@ -3,9 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { MenuCreateComponent } from './components/menu-create/menu-create.component';
 import { HomeComponent } from './components/home/home.component';
 import { AuthComponent } from './components/auth/auth.component';
+import { WelcomeComponent } from './components/welcome/welcome.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: WelcomeComponent },
   { path: 'auth', component: AuthComponent },
 
   {

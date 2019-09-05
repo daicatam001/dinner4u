@@ -6,20 +6,23 @@ import { MenuListComponent } from './menu-list/menu-list.component';
 import { HomeComponent } from './home/home.component';
 import { HomeHeroComponent } from './home/home-hero/home-hero.component';
 import { HomeContentComponent } from './home/home-content/home-content.component';
-import { AuthComponent } from './auth/auth.component';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
 import { AuthModule } from './auth/auth.module';
+import { HeaderLayoutComponent } from './header-layout/header-layout.component';
+import { WelcomeHeroComponent } from './welcome/welcome-hero/welcome-hero.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 @NgModule({
-  exports: [MenuCreateComponent, AuthModule],
+  exports: [MenuCreateComponent, HeaderLayoutComponent, AuthModule],
   imports: [SharedModule],
   declarations: [
     MenuCreateComponent,
     MenuListComponent,
     HomeComponent,
     HomeHeroComponent,
-    HomeContentComponent
+    HomeContentComponent,
+    HeaderLayoutComponent,
+    WelcomeHeroComponent,
+    WelcomeComponent
   ]
 })
 export class ComponentsModule {}
