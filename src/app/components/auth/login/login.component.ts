@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
         this.form.enable();
       },
       error => {
+        console.log('TCL: LoginComponent -> login -> error', error);
         this.loadingButton.loading(false);
         this.form.enable();
         this.errorMessage = error.error.message;

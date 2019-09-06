@@ -1,3 +1,17 @@
 [class*='col-'] {
   margin-bottom: 2rem;
 }
+
+.menu {
+  border-top: 5px solid #ef4b4b;
+}
+.menu-item {
+  font-size: 0.9rem;
+  // border: 1px solid green;
+  // border-radius: 3px;
+  font-weight: bold;
+  padding: 5px;
+  &::first-letter {
+    text-transform: uppercase;
+  }
+}

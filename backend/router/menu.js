@@ -1,7 +1,10 @@
 const express = require('express');
+const { validationResult } = require('express-validator');
+
 const validator = require('../middleware/validator');
 const Menu = require('../model/menu');
-const { validationResult } = require('express-validator');
+const Tag = require('../model/tag');
+const Dish = require('../model/dish');
 const { PAGE_SIZE } = require('../core/constants');
 
 const router = express.Router();
@@ -10,16 +13,30 @@ const router = express.Router();
 router.post('', validator.createMenu, (req, res) => {
   const result = validationResult(req);
   if (!result.isEmpty()) {
+    console.log('TCL: result', result);
     return res.status(422).json({
       status: 'error',
       message: result.errors[0].msg
     });
   }
-  const dishes = req.body.dishes;
-  const menu = new Menu({ dishes });
-  menu
-    .save()
-    .then(menuObj => {
+  let { dishes, tags } = req.body;
+  dishes = dishes.map(dish => ({
+    name: dish
+  }));
+  tags = tags.map(tag => ({
+    name: tag
+  }));
+  console.log({ dishes, tags });
+  Promise.all([Dish.insertMany(dishes), Tag.insertMany(tags)])
+    .then(([dishDocs, tagDocs]) => {
+      console.log('TCL: dishDocs, tagDocs', dishDocs, tagDocs);
+
+      const dishIds = dishDocs.map(doc => doc._id);
+      const tagIds = tagDocs.map(doc => doc._id);
+      const menu = new Menu({ dishIds, tagIds });
+      return menu.save();
+    })
+    .then(() => {
       return res.status(201).json({
         status: 'ok'
       });

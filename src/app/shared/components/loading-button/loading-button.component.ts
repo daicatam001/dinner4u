@@ -3,7 +3,9 @@ import {
   ContentChild,
   AfterContentInit,
   forwardRef,
-  ElementRef
+  ElementRef,
+  Input,
+  HostBinding
 } from '@angular/core';
 import { LoadingButtonDirective } from './loading-button.directive';
 
@@ -15,8 +17,10 @@ import { LoadingButtonDirective } from './loading-button.directive';
 export class LoadingButtonComponent implements AfterContentInit {
   @ContentChild(LoadingButtonDirective, { static: false })
   button: LoadingButtonDirective;
+  @HostBinding('class.fix-position') @Input() isFixPositionIcon;
   constructor() {}
   ngAfterContentInit() {
+    console.log(this.isFixPositionIcon);
     if (!this.button) {
       throw new Error('Do not find a button');
     }

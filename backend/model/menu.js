@@ -1,11 +1,15 @@
 const mongoose = require('mongoose');
 
 const menuSchema = mongoose.Schema({
-  dishes: {
+  dishIds: {
     type: Array,
     required: true,
     default: [],
-    minLength: 3
+    minLength: 1
+  },
+  tagIds: {
+    type: Array,
+    default: []
   },
   created: { type: Date, required: true, default: new Date() },
   liked: { type: Number, require: true, default: 0 }

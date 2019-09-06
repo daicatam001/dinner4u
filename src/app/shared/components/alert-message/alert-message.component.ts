@@ -22,20 +22,12 @@ export class AlertMessageComponent implements OnInit {
   }
 
   showFailAlert(message?: string) {
-    console.log(
-      'TCL: AlertMessageComponent -> showFailAlert -> message',
-      message
-    );
-    if (message) {
-      this.message = message;
-    }
+    this.message = message;
     this.type = 'fail';
     this.isShow = true;
   }
   showSuccessAlert(message?: string) {
-    if (message) {
-      this.message = message;
-    }
+    this.message = message;
     this.type = 'success';
     this.isShow = true;
   }

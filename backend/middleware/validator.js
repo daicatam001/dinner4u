@@ -15,7 +15,7 @@ exports.createMenu = [
     .exists()
     .isArray()
     .custom(dishes => {
-      if (dishes.length < 3) {
+      if (dishes.length === 0) {
         throw new Error();
       }
       return true;

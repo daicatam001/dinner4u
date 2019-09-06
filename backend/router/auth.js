@@ -10,7 +10,7 @@ router.use('/login', login, (req, res) => {
   if (!result.isEmpty()) {
     return res.status(422).json({
       status: 'error',
-      message: result.errors[0].message
+      message: result.errors[0].msg
     });
   }
   console.log(req.userData);

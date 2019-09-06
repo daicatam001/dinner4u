@@ -19,8 +19,8 @@ import { AlertMessageComponent } from 'src/app/shared/components/alert-message/a
 })
 export class MenuCreateComponent implements OnInit, AfterViewInit, OnDestroy {
   menu: Menu;
-  errorMessage: string;
-  form: FormGroup;
+  formDish: FormGroup;
+  formTag: FormGroup;
   isShowAlert;
   _onCloseObs;
   @ViewChild(AlertMessageComponent, { static: false })
@@ -33,28 +33,28 @@ export class MenuCreateComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.menu = { dishes: [] };
-    this.form = this.formBuilder.group({
+    this.menu = { dishes: [], tags: [] };
+    this.formDish = this.formBuilder.group({
       dish: ['', Validators.required]
     });
-  }
-  ngAfterViewInit() {
-    this._onCloseObs = this.alertMessage.onClose.subscribe(() => {
-      // For fade effect
-      setTimeout(() => {
-        this.errorMessage = null;
-      }, 500);
+    this.formTag = this.formBuilder.group({
+      tag: ['', Validators.required]
     });
   }
+  ngAfterViewInit() {}
   ngOnDestroy() {
     this._onCloseObs.unsubscribe();
   }
   addDish() {
-    if (this.form.invalid) {
+    if (this.formDish.invalid) {
       return;
     }
-    this.menu.dishes.push(this.form.get('dish').value);
-    this.form.reset();
+    const dish = this.formDish.get('dish').value;
+    const duplicateDish = this.menu.dishes.filter(item => item === dish);
+    if (duplicateDish.length === 0) {
+      this.menu.dishes.push(dish);
+    }
+    this.formDish.reset();
   }
   createMenu() {
     this.loadingState(true);
@@ -64,22 +64,34 @@ export class MenuCreateComponent implements OnInit, AfterViewInit, OnDestroy {
         this.alertMessage.showSuccessAlert();
         this.menu.dishes = [];
         // For fade effect
-        setTimeout(() => {
-          this.errorMessage = null;
-        }, 500);
-        this.form.reset();
+        this.formDish.reset();
       },
       err => {
         this.loadingState(false);
-        this.alertMessage.showFailAlert();
-        this.errorMessage = err.error.message;
-        return throwError(this.errorMessage);
+        this.alertMessage.showFailAlert(err.error.message);
+        return throwError(err.error.message);
       }
     );
   }
   loadingState(state) {
     // Disable form when loading
-    state ? this.form.disable() : this.form.enable();
+    state ? this.formDish.disable() : this.formDish.enable();
     this.loadingButton.loading(state);
+  }
+
+  addTag() {
+    if (this.formTag.invalid) {
+      return;
+    }
+    const tag = this.formTag.get('tag').value;
+    const duplicateTag = this.menu.tags.filter(item => item === tag);
+    if (duplicateTag.length === 0) {
+      this.menu.tags.push(tag);
+    }
+
+    this.formTag.reset();
+  }
+  removeTag(index: number) {
+    this.menu.tags = this.menu.tags.filter((item, i) => i !== index);
   }
 }

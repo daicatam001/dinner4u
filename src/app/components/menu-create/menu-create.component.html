@@ -1,50 +1,76 @@
-<div class="container">
+<div class="container py-4">
+
   <div class="row">
     <div class="col-md-4">
-      <h3 class="number">1</h3>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut laudantium ex quos</p>
-      <form [formGroup]='form' class="form-group" novalidate autocomplete="off">
-        <div class="form-group">
-          <input type="text" class="form-control" formControlName='dish'>
-        </div>
-
-        <div class="form-group text-right">
-          <button class="btn btn-primary" [disabled]="form.disabled||form.invalid?true:null" (click)="addDish()">
-            Thêm món ăn
-          </button>
-        </div>
-      </form>
+      <h3 class="number text-primary">1</h3>
+      <h3 class="title">Thêm món ăn</h3>
+      <hr class="border-primary">
+      <div class="content">
+        <p>Thêm món ăn:</p>
+        <form [formGroup]='formDish' class="form-group" novalidate autocomplete="off">
+          <div class="form-group">
+            <div class="input-group">
+              <input type="text" class="form-control" formControlName='dish'>
+              <div class="input-group-append">
+                <button class="btn btn-primary px-4" [disabled]="formDish.disabled||formDish.invalid?true:null"
+                  (click)="addDish()"><i class="fa fa-plus"></i></button>
+              </div>
+            </div>
+          </div>
+        </form>
+        <p>Thêm tag để mọi dười có thể dễ dàng tìm thấy bữa của bạn:</p>
+        <form [formGroup]='formTag' class="form-group" novalidate autocomplete="off">
+          <div class="form-group">
+            <div class="input-group">
+              <input type="text" class="form-control" formControlName='tag'>
+              <div class="input-group-append">
+                <button class="btn btn-primary px-4" [disabled]="formTag.disabled||formTag.invalid?true:null"
+                  (click)="addTag()"><i class="fa fa-plus"></i></button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
     <div class="col-md-4">
-      <h3 class="number">2</h3>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut laudantium ex quos</p>
-      <div class="card">
-        <div class="card-body">
-          <div *ngFor="let dish of menu.dishes">
-            {{dish}}
+      <h3 class="number text-primary">2</h3>
+      <h3 class="title">Review bữa của bạn</h3>
+      <hr class="border-primary">
+      <div class="content">
+        <p>Thực hiện hiểu chỉnh nếu cần thiết:</p>
+        <div class="card menu">
+          <div class="card-body">
+            <div class="menu-item" *ngFor="let dish of menu.dishes">
+              {{dish}}
+            </div>
           </div>
+        </div>
+        <div class="badges mt-1">
+          <span class="badge badge-pill badge-danger p-2 m-1" *ngFor="let tag of menu.tags;let i=index">{{tag}}
+            <i class="fa fa-times ml-1" (click)="removeTag(i)"></i>
+          </span>
         </div>
       </div>
     </div>
     <div class="col-md-4">
-      <h3 class="number">3</h3>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut laudantium ex quos </p>
-      <loading-button>
-        <button class="btn btn-primary loading" (click)="createMenu()">
-          create menu
-        </button>
-      </loading-button>
+      <h3 class="number text-primary">3</h3>
+      <h3 class="title">Hoàn thành</h3>
+      <hr class="border-primary">
+      <div class="content">
+        <p>Hãy cùng chia sẻ bữa ăn của bạn tới mọi người thôi!!!</p>
+        <div class="text-right">
+          <loading-button>
+            <button class="btn btn-primary loading" (click)="createMenu()">
+              Chia sẻ
+            </button>
+          </loading-button>
+        </div>
+      </div>
 
       <alert-message>
-        <ng-container *ngIf="errorMessage; else successMessage">
-          {{errorMessage}}
-        </ng-container>
-        <ng-template #successMessage>
-          <strong>Tuyệt vời!!! </strong>Bữa ngon của bạn đã được chia sẻ tới mọi người. Tiếp tục chia sẻ hoặc <a
-            href="">Xem thêm
-            bữa ngon</a>
-        </ng-template>
-
+        <strong>Tuyệt vời!!! </strong>Bữa ngon của bạn đã được chia sẻ tới mọi người. Tiếp tục chia sẻ hoặc <a
+          href="">Xem thêm
+          bữa ngon</a>
       </alert-message>
     </div>
   </div>
