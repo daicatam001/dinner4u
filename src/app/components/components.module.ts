@@ -11,6 +11,7 @@ import { WelcomeHeroComponent } from './welcome/welcome-hero/welcome-hero.compon
 import { WelcomeComponent } from './welcome/welcome.component';
 import { FooterLayoutComponent } from './footer-layout/footer-layout.component';
 import { WelcomeContentComponent } from './welcome/welcome-content/welcome-content.component';
+import { MenuResolver } from './welcome/welcome-menu.resolver';
 
 @NgModule({
   exports: [

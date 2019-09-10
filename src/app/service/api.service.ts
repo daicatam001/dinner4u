@@ -22,4 +22,7 @@ export class ApiService {
   public post(url: string, data) {
     return this.httpClient.post(this.baseUrl + url, data);
   }
+  public fetch(url?: string, params?) {
+    return this.httpClient.get(this.baseUrl + '/fetch' + url, { params });
+  }
 }

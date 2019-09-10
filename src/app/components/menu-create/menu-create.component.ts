@@ -17,12 +17,13 @@ import { AlertMessageComponent } from 'src/app/shared/components/alert-message/a
   templateUrl: './menu-create.component.html',
   styleUrls: ['./menu-create.component.scss']
 })
-export class MenuCreateComponent implements OnInit, AfterViewInit, OnDestroy {
-  menu: Menu;
+export class MenuCreateComponent implements OnInit, AfterViewInit {
+  // menu: Menu;
+  dishes: Array<string>;
+  tags: Array<string>;
   formDish: FormGroup;
   formTag: FormGroup;
   isShowAlert;
-  _onCloseObs;
   @ViewChild(AlertMessageComponent, { static: false })
   alertMessage: AlertMessageComponent;
   @ViewChild(LoadingButtonComponent, { static: false })
@@ -33,7 +34,9 @@ export class MenuCreateComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.menu = { dishes: [], tags: [] };
+    // this.menu = { dishes: [], tags: [] };
+    this.dishes = [];
+    this.tags = [];
     this.formDish = this.formBuilder.group({
       dish: ['', Validators.required]
     });
@@ -42,28 +45,40 @@ export class MenuCreateComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
   ngAfterViewInit() {}
-  ngOnDestroy() {
-    this._onCloseObs.unsubscribe();
-  }
   addDish() {
     if (this.formDish.invalid) {
       return;
     }
     const dish = this.formDish.get('dish').value;
-    const duplicateDish = this.menu.dishes.filter(item => item === dish);
+    const duplicateDish = this.dishes.filter(item => item === dish);
     if (duplicateDish.length === 0) {
-      this.menu.dishes.push(dish);
+      this.dishes.push(dish);
     }
     this.formDish.reset();
   }
+  addTag() {
+    if (this.formTag.invalid) {
+      return;
+    }
+    const tag = this.formTag.get('tag').value;
+    const duplicateTag = this.tags.filter(item => item === tag);
+    if (duplicateTag.length === 0) {
+      this.tags.push(tag);
+    }
+
+    this.formTag.reset();
+  }
+  removeTag(index: number) {
+    this.tags = this.tags.filter((item, i) => i !== index);
+  }
   createMenu() {
     this.loadingState(true);
-    this.menuService.create(this.menu).subscribe(
+    this.menuService.createNew(this.dishes, this.tags).subscribe(
       () => {
         this.loadingState(false);
         this.alertMessage.showSuccessAlert();
-        this.menu.dishes = [];
-        // For fade effect
+        this.dishes = [];
+        this.tags = [];
         this.formDish.reset();
       },
       err => {
@@ -77,21 +92,5 @@ export class MenuCreateComponent implements OnInit, AfterViewInit, OnDestroy {
     // Disable form when loading
     state ? this.formDish.disable() : this.formDish.enable();
     this.loadingButton.loading(state);
-  }
-
-  addTag() {
-    if (this.formTag.invalid) {
-      return;
-    }
-    const tag = this.formTag.get('tag').value;
-    const duplicateTag = this.menu.tags.filter(item => item === tag);
-    if (duplicateTag.length === 0) {
-      this.menu.tags.push(tag);
-    }
-
-    this.formTag.reset();
-  }
-  removeTag(index: number) {
-    this.menu.tags = this.menu.tags.filter((item, i) => i !== index);
   }
 }

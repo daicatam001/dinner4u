@@ -40,13 +40,13 @@
         <p>Thực hiện hiểu chỉnh nếu cần thiết:</p>
         <div class="card menu">
           <div class="card-body">
-            <div class="menu-item" *ngFor="let dish of menu.dishes">
+            <div class="menu-item" *ngFor="let dish of dishes">
               {{dish}}
             </div>
           </div>
         </div>
         <div class="badges mt-1">
-          <span class="badge badge-pill badge-danger p-2 m-1" *ngFor="let tag of menu.tags;let i=index">{{tag}}
+          <span class="badge badge-pill badge-danger p-2 m-1" *ngFor="let tag of tags;let i=index">{{tag}}
             <i class="fa fa-times ml-1" (click)="removeTag(i)"></i>
           </span>
         </div>
@@ -69,7 +69,7 @@
 
       <alert-message>
         <strong>Tuyệt vời!!! </strong>Bữa ngon của bạn đã được chia sẻ tới mọi người. Tiếp tục chia sẻ hoặc <a
-          href="">Xem thêm
+          [routerLink]="['']">Xem thêm
           bữa ngon</a>
       </alert-message>
     </div>

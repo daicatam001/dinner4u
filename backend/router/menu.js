@@ -29,11 +29,11 @@ router.post('', validator.createMenu, (req, res) => {
   console.log({ dishes, tags });
   Promise.all([Dish.insertMany(dishes), Tag.insertMany(tags)])
     .then(([dishDocs, tagDocs]) => {
-      console.log('TCL: dishDocs, tagDocs', dishDocs, tagDocs);
+      // console.log('TCL: dishDocs, tagDocs', dishDocs, tagDocs);
 
-      const dishIds = dishDocs.map(doc => doc._id);
-      const tagIds = tagDocs.map(doc => doc._id);
-      const menu = new Menu({ dishIds, tagIds });
+      // const dishIds = dishDocs.map(doc => doc._id);
+      // const tagIds = tagDocs.map(doc => doc._id);
+      const menu = new Menu({ dishes: dishDocs, tags: tagDocs });
       return menu.save();
     })
     .then(() => {
@@ -61,8 +61,11 @@ router.post('/find', validator.findMenu, (req, res) => {
   let { page, size } = req.body;
 
   Menu.find()
+    .populate('dishes', 'name')
+    .populate('tags', 'name')
     .skip(size * (page - 1))
     .limit(size)
+    .exec()
     .then(menuList => {
       return res.status(200).json({
         status: 'ok',
@@ -77,5 +80,24 @@ router.post('/find', validator.findMenu, (req, res) => {
       });
     });
 });
-
+router.get('/fetch/welcome', (req, res) => {
+  Menu.find()
+    .populate('dishes', 'name')
+    .populate('tags', 'name')
+    .limit(10)
+    .exec()
+    .then(menuList => {
+      return res.status(200).json({
+        status: 'ok',
+        data: menuList
+      });
+    })
+    .catch(error => {
+      console.log('TCL: error', error);
+      res.status(500).json({
+        status: 'error',
+        message: error.message
+      });
+    });
+});
 module.exports = router;

@@ -1,7 +1,8 @@
 import { Injectable, Injector } from '@angular/core';
 import { ApiService } from './api.service';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
+import { Menu } from '../core/model/menu.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +13,14 @@ export class MenuService extends ApiService {
     this.setBaseUrl('menu');
   }
 
-  public create(data): Observable<any> {
-    console.log(1);
-    return this.httpClient.post(this.baseUrl, data).pipe(
+  public createNew(dishes, tags): Observable<any> {
+    return this.httpClient.post(this.baseUrl, { dishes, tags }).pipe(
       tap(res => {
         console.log(2);
       })
     );
+  }
+  public getWelcomeMenu() {
+    return this.fetch('/welcome');
   }
 }

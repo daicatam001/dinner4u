@@ -4,9 +4,16 @@ import { MenuCreateComponent } from './components/menu-create/menu-create.compon
 import { HomeComponent } from './components/home/home.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { MenuResolver } from './components/welcome/welcome-menu.resolver';
 
 const routes: Routes = [
-  { path: '', component: WelcomeComponent },
+  {
+    path: '',
+    component: WelcomeComponent,
+    resolve: {
+      data: MenuResolver
+    }
+  },
   { path: 'auth', component: AuthComponent },
 
   {
