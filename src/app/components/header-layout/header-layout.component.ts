@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalService } from 'src/app/shared/components/modal/modal.service';
 import { AuthComponent } from '../auth/auth.component';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'header-layout',
@@ -8,11 +9,20 @@ import { AuthComponent } from '../auth/auth.component';
   styleUrls: ['./header-layout.component.scss']
 })
 export class HeaderLayoutComponent implements OnInit {
-  constructor(private modalService: ModalService) {}
+  user$;
+  constructor(
+    private modalService: ModalService,
+    private authService: AuthService
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.user$ = this.authService.user$;
+  }
   openAuth(event: Event, isLogin: boolean = false) {
     this.modalService.open(AuthComponent, null, { data: { isLogin } });
     event.preventDefault();
+  }
+  logout() {
+    this.authService.logout();
   }
 }

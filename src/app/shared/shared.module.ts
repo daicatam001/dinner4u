@@ -8,6 +8,7 @@ import { IconInputComponent } from './components/icon-input/icon-input.component
 import { ModalComponent } from './components/modal/modal.component';
 import { ModalModule } from './components/modal/modal.module';
 import { ShowPasswordDirective } from './directives/show-password.directive';
+import { LimitTextPipe } from './directives/limit-text.pipe';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ShowPasswordDirective } from './directives/show-password.directive';
     AlertMessageComponent,
     IconInputComponent,
     TabComponent,
-    ShowPasswordDirective
+    ShowPasswordDirective,
+    LimitTextPipe
   ],
   imports: [LibsModule],
   exports: [
@@ -27,7 +29,8 @@ import { ShowPasswordDirective } from './directives/show-password.directive';
     IconInputComponent,
     LibsModule,
     ModalModule,
-    ShowPasswordDirective
+    ShowPasswordDirective,
+    LimitTextPipe
   ]
 })
 export class SharedModule {}

@@ -41,15 +41,19 @@ exports.login = [
     .isEmpty()
     .custom((username, { req }) => {
       let userData;
-      return User.findOne({ $or: [{ username }, { email: username }] })
+      return User.findOne({
+        $or: [{ username: username }, { email: username }]
+      })
         .then(user => {
           if (!user) {
             return Promise.reject();
           }
           userData = user;
+          console.log(req.body.password, user.password);
           return bcrypjs.compare(req.body.password, user.password);
         })
         .then(result => {
+          console.log(result);
           if (!result) {
             return Promise.reject();
           }

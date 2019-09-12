@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const bcryptjs = require('bcryptjs');
 const User = require('../model/user');
+const jwt = require('jsonwebtoken');
+require('dotenv').config({ path: './backend/.env' });
 const { validationResult } = require('express-validator');
 const { login, register } = require('../middleware/validator');
 router.use('/login', login, (req, res) => {
@@ -13,10 +15,12 @@ router.use('/login', login, (req, res) => {
       message: result.errors[0].msg
     });
   }
-  console.log(req.userData);
+  const token = jwt.sign({ id: req.userData._id }, process.env.JWT_SECRET, {
+    expiresIn: '1h'
+  });
   return res.status(200).json({
     status: 'ok',
-    data: req.userData
+    data: { userId: req.userData._id, token, expiredDuration: 3600 }
   });
 });
 
