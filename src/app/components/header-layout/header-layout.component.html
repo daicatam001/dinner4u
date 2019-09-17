@@ -19,7 +19,7 @@
           <li class="nav-item px-3">
             <a href class="user"> Xin chào, user{{(user$ | async)|limitText:3}} <i class="fa fa-user-o"></i></a>
             <div class="tool-tip">
-              <a href (click)="logout()">Đăng xuất</a>
+              <a href (click)="logout($event)">Đăng xuất</a>
             </div>
           </li>
 

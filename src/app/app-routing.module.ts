@@ -14,7 +14,8 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     resolve: {
       data: MenuResolver
-    }
+    },
+    runGuardsAndResolvers: 'always'
   },
   {
     path: 'home',

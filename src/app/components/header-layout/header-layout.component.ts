@@ -22,7 +22,8 @@ export class HeaderLayoutComponent implements OnInit {
     this.modalService.open(AuthComponent, null, { data: { isLogin } });
     event.preventDefault();
   }
-  logout() {
+  logout(event: Event) {
     this.authService.logout();
+    event.preventDefault();
   }
 }
