@@ -11,16 +11,6 @@ import { tap, switchMap, map } from 'rxjs/operators';
   styleUrls: ['./welcome-content.component.scss']
 })
 export class WelcomeContentComponent implements OnInit {
-  menuList: Array<Menu> = [
-    {
-      dishes: ['Bánh canh ngọt', 'Cơm rang'],
-      tags: []
-    },
-    {
-      dishes: ['phở bò'],
-      tags: []
-    }
-  ];
 
   menuList$: Observable<Menu[]>;
 

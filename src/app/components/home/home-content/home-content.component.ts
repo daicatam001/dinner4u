@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {Observable} from 'rxjs';
+import {Menu} from '../../../core/model/menu.model';
+import {ActivatedRoute} from '@angular/router';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'home-content',
@@ -7,9 +11,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeContentComponent implements OnInit {
 
-  constructor() { }
+  menuList$: Observable<Menu[]>;
+
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
+    this.menuList$ = this.route.data.pipe(map(item => item['data']['data']));
   }
 
 }

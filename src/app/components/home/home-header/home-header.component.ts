@@ -12,10 +12,10 @@ import { AuthComponent } from '../../auth/auth.component';
 
 @Component({
   selector: 'home-hero',
-  templateUrl: './home-hero.component.html',
-  styleUrls: ['./home-hero.component.scss']
+  templateUrl: './home-header.component.html',
+  styleUrls: ['./home-header.component.scss']
 })
-export class HomeHeroComponent implements OnInit {
+export class HomeHeaderComponent implements OnInit {
   constructor(private modalService: ModalService) {}
 
   ngOnInit() {}

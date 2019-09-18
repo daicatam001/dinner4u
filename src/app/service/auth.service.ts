@@ -37,7 +37,7 @@ export class AuthService extends ApiService {
   accessSuccess(user: string, token: string, expireDuration: number) {
     const now = new Date();
     const expiredTime = new Date(
-      now.getTime() + expireDuration * 100
+      now.getTime() + expireDuration * 1000
     ).getTime();
     this.updateUser(user);
     this.setExpiredTimer(expireDuration);
