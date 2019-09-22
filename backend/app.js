@@ -12,7 +12,8 @@ const app = express();
 mongoose
   .connect(process.env.DB_CONNECT, {
     useCreateIndex: true,
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useFindAndModify: false
   })
   .then(() => console.log('DB Connected'))
   .catch(() => console.log('DB Connection fail'));
